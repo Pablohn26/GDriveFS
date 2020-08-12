@@ -60,6 +60,10 @@ def _main():
 
     _logger.debug("Mounting GD with creds at [%s]: %s",
                   args.auth_storage_filepath, args.mountpoint)
+    
+    if not os.path.isdir(args.mountpoint):
+        _logger.exception("bad mount point %s: Directory not found", args.mountpoint)
+        raise Exception("bad mount point {}: Directory not found".format(args.mountpoint)) 
 
     if args.fake is True:
         _logger.warning("'Fake' mount. Exiting successfully.")
